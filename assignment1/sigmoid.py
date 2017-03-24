@@ -66,8 +66,8 @@ def test_sigmoid():
     This function will not be called by the autograder, nor will
     your tests be graded.
     """
-    pass
     print "Running your tests..."
+    return
     ### YOUR CODE HERE
     raise NotImplementedError
     ### END YOUR CODE
