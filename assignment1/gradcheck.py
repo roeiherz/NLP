@@ -32,18 +32,20 @@ def gradcheck_naive(f, x):
         # to test cost functions with built in randomness later.
 
         # Get the x - h
-        x_minus_h = x[ix] - h
+        x[ix] -= h
 
         # Random state before calling to f
         random.setstate(rndstate)
-        before, _ = f(x_minus_h)
+        before, _ = f(x)
 
         # Get x + h
-        x_plus_h = x[ix] + h
+        x[ix] += 2 * h
 
         # Random state before calling to f
         random.setstate(rndstate)
-        after, _ = f(x_plus_h)
+        after, _ = f(x)
+        #restore val
+        x[ix] -= h
 
         # Calc grad with (f(x+h) - f(x-h))/ 2h
         numgrad = (after - before) / (2 * h)

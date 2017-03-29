@@ -96,7 +96,7 @@ def test_softmax():
     This function will not be called by the autograder, nor will
     your tests be graded.
     """
-    pass
+    return
     print "Running your tests..."
     ### YOUR CODE HERE
     raise NotImplementedError

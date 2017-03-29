@@ -15,9 +15,8 @@ def knn(vector, matrix, k=10):
 
     nearest_idx = []
 
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    cosine_dist_vec = np.dot(matrix, vector.T)
+    nearest_idx = cosine_dist_vec.argsort()[-k:][::-1]
     return nearest_idx
 
 def test_knn():
@@ -29,7 +28,7 @@ def test_knn():
     """
     print "Running your tests..."
     ### YOUR CODE HERE
-    raise NotImplementedError
+    #raise NotImplementedError
     ### END YOUR CODE
 
 if __name__ == "__main__":

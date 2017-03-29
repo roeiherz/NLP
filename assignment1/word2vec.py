@@ -52,8 +52,9 @@ def softmaxCostAndGradient(predicted, target, outputVectors, dataset):
     Arguments:
     predicted -- numpy ndarray, predicted word vector (\hat{v} in
                  the written component)
-    target -- integer, the index of the target word
-    outputVectors -- "output" vectors (as rows) for all tokens
+                 [1 x D]
+    target -- integer, the index of the target word [1]
+    outputVectors -- "output" vectors (as rows) for all tokens [N X D]
     dataset -- needed for negative sampling, unused here.
 
     Return:
@@ -69,6 +70,22 @@ def softmaxCostAndGradient(predicted, target, outputVectors, dataset):
     """
 
 
+    # Define Uo, Vc
+    Uo = outputVectors[target]  # [1 X D]
+    Vc = predicted # [1 X D]
+
+    # cost
+    X = np.dot(predicted, outputVectors.transpose()) # [1 X N]
+    softmax_vec = softmax(X) # [1 X N]
+    log_softmax = np.log(softmax_vec)
+    cost = - log_softmax[target]
+
+    # grad (Vc)
+    gradPred = Uo - np.dot(softmax_vec, outputVectors) # [1 X D]
+
+    # grad (U)
+    grad = - np.dot(softmax_vec.reshape((-1, 1)), Vc.reshape((-1, 1)).T) # [N X D]
+    grad[target] += Vc
 
     return cost, gradPred, grad
 
@@ -104,22 +121,43 @@ def negSamplingCostAndGradient(predicted, target, outputVectors, dataset, K=10):
     indices.extend(getNegativeSamples(target, dataset, K))
 
     # Define Uo, Vc
-    Uo = outputVectors[predicted]
-    Vc = target
+    Uo = outputVectors[target]
+    Vc = predicted
 
+    ## Cost
     # Define x = Uo.Vc
-    pos_x = np.dot(Uo, Vc)
-    neg_x = np.dot(Uo, Vc)
+    pos_x = np.dot(Uo, Vc.transpose()) # [scalar]
 
     # Sigmoid
-    sigma = sigmoid(pos_x)
+    sigma = sigmoid(pos_x) # [scalar]
 
     # positive J of the cost function
-    pos_J = -np.log(sigma)
+    pos_J = -np.log(sigma) # [scalar]
 
-    #
+    # calc neg_J
+    neg_J = 0
     for i in range(1, K + 1):
         Uo_neg = outputVectors[indices[i]]
+        neg_x = -1 * np.dot(Uo_neg, Vc.transpose()) # [scalar]
+        neg_J += -np.log(sigmoid(neg_x)) # [scalar]
+    cost = pos_J + neg_J # [scalar]
+
+    ## Grad (Vc)
+    grad_pos = (sigma - 1) * Uo # [1 X D]
+    grad_neg = 0
+    for i in range(1, K + 1):
+        Uo_neg = outputVectors[indices[i]]
+        neg_x = -1 * np.dot(Uo_neg, Vc.transpose()) # scalar
+        grad_neg += (sigmoid(neg_x) - 1) * Uo_neg # [1 X D]
+    gradPred = grad_pos - grad_neg # [1 X D]
+
+    ## gradpred (Uo)
+    grad = np.zeros(outputVectors.shape) # [N X D]
+    grad[target] = (sigma - 1) * Vc # [ 1 X D]
+    for i in range(1, K + 1):
+        Uo_neg = outputVectors[indices[i]]
+        neg_x = -1 * np.dot(Uo_neg, Vc)
+        grad[indices[i]] += - (sigmoid(neg_x) - 1) * Vc # [1 X D]
 
     return cost, gradPred, grad
 
@@ -152,7 +190,13 @@ def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     gradIn = np.zeros(inputVectors.shape)
     gradOut = np.zeros(outputVectors.shape)
 
-
+    predicted = inputVectors[tokens[currentWord]]
+    for j in range(min(2 * C, len(contextWords))):
+        target_word_index = tokens[contextWords[j]]
+        costF, gradPredF, gradF = word2vecCostAndGradient(predicted, target_word_index, outputVectors, dataset)
+        cost +=  costF
+        gradOut += gradF
+        gradIn[target_word_index] += gradPredF
 
 
     return cost, gradIn, gradOut
@@ -175,8 +219,9 @@ def cbow(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     gradIn = np.zeros(inputVectors.shape)
     gradOut = np.zeros(outputVectors.shape)
 
+
     ### YOUR CODE HERE
-    raise NotImplementedError
+    #raise NotImplementedError
     ### END YOUR CODE
 
     return cost, gradIn, gradOut
