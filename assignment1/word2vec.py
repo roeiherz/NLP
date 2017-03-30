@@ -81,11 +81,11 @@ def softmaxCostAndGradient(predicted, target, outputVectors, dataset):
     cost = - log_softmax[target]
 
     # grad (Vc)
-    gradPred = Uo - np.dot(softmax_vec, outputVectors) # [1 X D]
+    gradPred = - Uo + np.dot(softmax_vec, outputVectors) # [1 X D]
 
     # grad (U)
-    grad = - np.dot(softmax_vec.reshape((-1, 1)), Vc.reshape((-1, 1)).T) # [N X D]
-    grad[target] += Vc
+    grad =  np.dot(softmax_vec.reshape((-1, 1)), Vc.reshape((-1, 1)).T) # [N X D]
+    grad[target] -= Vc
 
     return cost, gradPred, grad
 
@@ -133,7 +133,8 @@ def negSamplingCostAndGradient(predicted, target, outputVectors, dataset, K=10):
 
     # positive J of the cost function
     pos_J = -np.log(sigma) # [scalar]
-
+    ## we could implement more efficent code - but we decided to seperate the calculation of the cost and the grads
+    ## for clearer implementation
     # calc neg_J
     neg_J = 0
     for i in range(1, K + 1):
@@ -174,8 +175,8 @@ def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     contextWords -- list of no more than 2*C strings, the context words
     tokens -- a dictionary that maps words to their indices in
               the word vector list
-    inputVectors -- "input" word vectors (as rows) for all tokens
-    outputVectors -- "output" word vectors (as rows) for all tokens
+    inputVectors -- "input" word vectors (as rows) for all tokens (V)
+    outputVectors -- "output" word vectors (as rows) for all tokens (U)
     word2vecCostAndGradient -- the cost and gradient function for
                                a prediction vector given the target
                                word vectors, could be one of the two
@@ -190,13 +191,14 @@ def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     gradIn = np.zeros(inputVectors.shape)
     gradOut = np.zeros(outputVectors.shape)
 
-    predicted = inputVectors[tokens[currentWord]]
+    predicted_index = tokens[currentWord]
+    predicted = inputVectors[predicted_index]
     for j in range(min(2 * C, len(contextWords))):
         target_word_index = tokens[contextWords[j]]
         costF, gradPredF, gradF = word2vecCostAndGradient(predicted, target_word_index, outputVectors, dataset)
         cost +=  costF
         gradOut += gradF
-        gradIn[target_word_index] += gradPredF
+        gradIn[predicted_index] += gradPredF
 
 
     return cost, gradIn, gradOut
