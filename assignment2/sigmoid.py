@@ -14,9 +14,7 @@ def sigmoid(x):
     s -- sigmoid(x)
     """
 
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    s = 1.0 / (1.0 + np.exp(-x))
 
     return s
 
@@ -34,9 +32,7 @@ def sigmoid_grad(s):
     ds -- Your computed gradient.
     """
 
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    ds = np.multiply(s, (1.0 - s))
 
     return ds
 
@@ -71,11 +67,12 @@ def test_sigmoid():
     your tests be graded.
     """
     print "Running your tests..."
+    return
     ### YOUR CODE HERE
     raise NotImplementedError
     ### END YOUR CODE
 
 
 if __name__ == "__main__":
-    test_sigmoid_basic();
+    test_sigmoid_basic()
     test_sigmoid()

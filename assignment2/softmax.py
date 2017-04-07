@@ -17,7 +17,7 @@ def softmax(x):
     for M x N matrices. This may be useful for testing later. Also,
     make sure that the dimensions of the output match the input.
 
-    You must implement the optimization in problem 1(a) of the
+    You must implement the optimization in problem assignment1(a) of the
     written assignment!
 
     Arguments:
@@ -29,15 +29,35 @@ def softmax(x):
     orig_shape = x.shape
 
     if len(x.shape) > 1:
-        # Matrix
-        ### YOUR CODE HERE
-        raise NotImplementedError
-        ### END YOUR CODE
+        # Implementation Matrix
+
+        # Get the maximum each row from data
+        max_rows = np.max(x, axis=1)
+        # Reshape the max rows to a matrix [:,assignment1]
+        reshape_max_rows = max_rows.reshape((max_rows.shape[0]), 1)
+        # Normalize the matrix by subtract the max from each row per row
+        norm_data = x - reshape_max_rows
+        # Power mat by exponent
+        exp_mat = np.exp(norm_data)
+        # Sum each col per exp_mat
+        exp_mat_rows_sum = np.sum(exp_mat, axis=1)
+        # The new SoftMax mat is exp_mat normalized by the rows_sum
+        x = exp_mat / exp_mat_rows_sum
+
     else:
-        # Vector
-        ### YOUR CODE HERE
-        raise NotImplementedError
-        ### END YOUR CODE
+        # Implementation a row Vector
+
+        # Get the maximum each row from data
+        max_rows = np.max(x)
+        # Normalize the matrix by subtract the max from each row per row
+        norm_data = x - max_rows
+        # Power mat by exponent
+        exp_mat = np.exp(norm_data)
+        # Sum each col per exp_mat
+        exp_mat_rows_sum = np.sum(exp_mat, axis=0)
+        # The new SoftMax mat is exp_mat normalized by the rows_sum
+        x = exp_mat / exp_mat_rows_sum
+        return x
 
     assert x.shape == orig_shape
     return x
@@ -76,6 +96,7 @@ def test_softmax():
     This function will not be called by the autograder, nor will
     your tests be graded.
     """
+    return
     print "Running your tests..."
     ### YOUR CODE HERE
     raise NotImplementedError
