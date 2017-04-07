@@ -1,4 +1,5 @@
 import numpy as np
+import scipy
 
 def knn(vector, matrix, k=10):
     """
@@ -13,11 +14,12 @@ def knn(vector, matrix, k=10):
     nearest_idx -- A numpy vector consists of the rows indices of the k-nearest neighbors in the matrix
     """
 
-    nearest_idx = []
-
-    cosine_dist_vec = np.dot(matrix, vector.T)
-    nearest_idx = cosine_dist_vec.argsort()[-k:][::-1]
-    return nearest_idx
+    #normzlize matrix, vectors and sort according to dot product
+    norm_matrix = matrix / np.sqrt((matrix * matrix).sum(axis=1)).reshape(-1, 1)
+    norm_vec = vector / np.sqrt((vector * vector).sum(axis=0))
+    cosine_dist_vec = np.abs(np.dot(norm_matrix, norm_vec.reshape(-1, 1)))
+    nearest_idx = cosine_dist_vec.argsort(axis=0)[-k:][::-1]
+    return nearest_idx.reshape(-1)
 
 def test_knn():
     """

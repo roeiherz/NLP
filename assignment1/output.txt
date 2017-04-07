@@ -4005,10 +4005,10 @@ iter 39990: expcost 9.550077  -  cost 10.034350
 iter 40000: expcost 9.577164  -  cost 10.091811
 sanity check: cost at convergence should be around or below 10
 training took 14513 seconds
-Words related to "the":  ['le', 'wearing', 'ladies', 'collage', 'bu\xc3\xb1uel', 'mental', 'kinky', 'apply', 'persona', 'eating', 'similarly']
-Words related to "unique":  ['le', 'wearing', 'bu\xc3\xb1uel', 'ladies', 'collage', 'kinky', 'mental', 'similarly', 'apply', 'persona', 'eating']
-Words related to "superb":  ['le', 'wearing', 'bu\xc3\xb1uel', 'ladies', 'mental', 'collage', 'similarly', 'apply', 'kinky', 'persona', 'eating']
-Words related to "comedy":  ['le', 'wearing', 'bu\xc3\xb1uel', 'ladies', 'collage', 'persona', 'similarly', 'mental', 'kinky', 'apply', 'eating']
-Words related to "surprisingly":  ['le', 'wearing', 'bu\xc3\xb1uel', 'ladies', 'collage', 'kinky', 'mental', 'apply', 'similarly', 'persona', 'blandness']
+Words related to "the":  ['the', 'if', 'that', 'comedy\\/thriller', 'or', 'a', '.', 'is', 'derek', 'bolt', 'decide']
+Words related to "unique":  ['unique', '1979', 'puns', 'ba', 'realized', 'succumb', 'chabrolian', 'dares', 'regardless', 'imaginative', 'lunar']
+Words related to "superb":  ['superb', 'mine', 'gold', 'zingers', 'moppets', 'roussillon', 'best', 'ghoulish', 'industry', 'pool', 'transporter']
+Words related to "comedy":  ['comedy', 'sensation', 'observation', 'fast', 'first-timer', 'singing', 'cleaving', 'longest', 'cute', 'mature', 'often-funny']
+Words related to "surprisingly":  ['surprisingly', 'either', 'hundred', '20-car', 'philandering', 'unusually', 'protective', 'dogs', 'bollywood', 'thinking', 'soderbergh']
 
 Process finished with exit code 0
