@@ -28,7 +28,19 @@ def forward(data, label, params, dimensions):
 
     # Compute the probability
     ### YOUR CODE HERE: forward propagation
-    raise NotImplementedError
+
+    # stage 1
+    v1 = np.dot(data, W1) + b1
+    z1 = sigmoid(v1)
+
+    # stage 2
+    v2 = np.dot(z1, W2) + b2
+    z2 = softmax(v2)
+
+    # add cost (cross entropy)
+    probs = np.sum(z2 * label, axis=1)
+
+    return probs
     ### END YOUR CODE
 
 def forward_backward_prop(data, labels, params, dimensions):
@@ -58,13 +70,34 @@ def forward_backward_prop(data, labels, params, dimensions):
     ofs += H * Dy
     b2 = np.reshape(params[ofs:ofs + Dy], (1, Dy))
 
-    ### YOUR CODE HERE: forward propagation
-    raise NotImplementedError
-    ### END YOUR CODE
+    cost = 0
+    # forward
 
-    ### YOUR CODE HERE: backward propagation
-    raise NotImplementedError
-    ### END YOUR CODE
+    # stage 1
+    v1 = np.dot(data, W1) + b1
+    z1 = sigmoid(v1)
+
+    # stage 2
+    v2 = np.dot(z1, W2) + b2
+    z2 = softmax(v2)
+
+    # add cost (cross entropy)
+    probs = np.sum(z2 * labels, axis=1)
+    # Number of samples
+    m = data.shape[0]
+    # Calculate Cost
+    cost = -np.sum(np.log(probs))
+
+    # backward
+    # According to section A: y^-1
+    delta2 = z2 - labels    # [20, 10]
+    gradW2 = np.dot(z1.T, delta2)
+    gradb2 = np.dot(delta2.T, np.ones((m, 1))).T    # ([10, 20] dot [20, 1]) .T = [1, 10]
+    # sigmoid grad z1 because the sigmoid_grad expects to get a sigmoid..
+    delta1Out = np.dot(delta2, W2.T)  # [20, 5]
+    delta1 = delta1Out * sigmoid_grad(z1)   # [20, 5]
+    gradW1 = np.dot(data.T, delta1)    # [10, 5]
+    gradb1 = np.dot(delta1.T, np.ones((m, 1))).T   # ([5, 20] dot [20, 1]) .T = [1, 5]
 
     ### Stack gradients (do not modify)
     grad = np.concatenate((gradW1.flatten(), gradb1.flatten(),
@@ -109,4 +142,4 @@ def your_sanity_checks():
 
 if __name__ == "__main__":
     sanity_check()
-    your_sanity_checks()
+    # your_sanity_checks()

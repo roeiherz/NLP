@@ -42,7 +42,7 @@ def softmax(x):
         # Sum each col per exp_mat
         exp_mat_rows_sum = np.sum(exp_mat, axis=1)
         # The new SoftMax mat is exp_mat normalized by the rows_sum
-        x = exp_mat / exp_mat_rows_sum
+        x = exp_mat / exp_mat_rows_sum.reshape(-1, 1)
 
     else:
         # Implementation a row Vector
