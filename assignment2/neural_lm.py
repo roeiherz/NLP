@@ -4,8 +4,6 @@ import pandas as pd
 import time
 import os.path
 
-from theano.gof.opt import out2in
-
 from data_utils import utils as du
 from numpy import *
 from neural import *
