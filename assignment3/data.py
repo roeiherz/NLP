@@ -62,47 +62,47 @@ def replace_word(word):
 
         # twoDigitNum class: "90"
         if word.isdigit() and len(word) == 2:
-            print "twoDigitNum: " + word
+            # print "twoDigitNum: " + word
             return "twoDigitNum"
 
         # fourDigitNum Class: "1987"
         if word.isdigit() and len(word) == 4:
-            print "fourDigitNum: " + word
+            # print "fourDigitNum: " + word
             return "fourDigitNum"
 
         # containsDigitAndAlpha class: "A4618-02"
         if re.match("^A[0-9]+-[0-9]+$", word):
-            print "containsDigitAndAlpha: " + word
+            # print "containsDigitAndAlpha: " + word
             return "containsDigitAndAlpha"
 
         # containsDigitAndDash class: "18-02"
         if re.match("^[0-9]+-[0-9]+$", word):
-            print "containsDigitAndDash: " + word
+            # print "containsDigitAndDash: " + word
             return "containsDigitAndDash"
 
         # containsDigitAndSlash class: "18-02"
         if re.match("^[0-9]+/[0-9]+/[0-9]+$", word):
-            print "containsDigitAndSlash: " + word
+            # print "containsDigitAndSlash: " + word
             return "containsDigitAndSlash"
 
         # containsDigitAndComma class: "18,1987.0"
         if re.match("^[0-9,.]+$", word):
-            print "containsDigitAndComma: " + word
+            # print "containsDigitAndComma: " + word
             return "containsDigitAndComma"
 
         # containsDigitAndPeriod class: "18.0"
         if re.match("^[0-9.]+$", word):
-            print "containsDigitAndPeriod: " + word
+            # print "containsDigitAndPeriod: " + word
             return "containsDigitAndPeriod"
 
         # otherNum class: "18555"
         if re.match("^[0-9]+$", word):
-            print "otherNum: " + word
+            # print "otherNum: " + word
             return "otherNum"
 
         # allCaps class: "LSTM"
         if re.match("^[A-Z]+$", word):
-            print "allCaps: " + word
+            # print "allCaps: " + word
             return "allCaps"
 
         # first word in a sentence class
@@ -111,15 +111,15 @@ def replace_word(word):
 
         # initCap class: "Herzig"
         if re.match("^[A-Z][a-z]+$", word):
-            print "initCap: " + word
+            # print "initCap: " + word
             return "initCap"
 
         # lowerCase class: "herzig"
         if re.match("^[a-z]+$", word):
-            print "lowerCase: " + word
+            # print "lowerCase: " + word
             return "lowerCase"
 
-        print "##########other: " + word
+        # print "##########other: " + word
         return "other"
     except Exception as e:
         print "Error for replacing word"
