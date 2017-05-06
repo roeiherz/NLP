@@ -240,7 +240,7 @@ def hmm_eval(test_data, total_tokens, q_tri_counts, q_bi_counts, q_uni_counts, e
 
         # Only for debugging
         debug_inx += 1
-        print "sent " + str(debug_inx)
+        #print "sent " + str(debug_inx)
 
         #if debug_inx == 3:
         #    break
@@ -251,8 +251,8 @@ def hmm_eval(test_data, total_tokens, q_tri_counts, q_bi_counts, q_uni_counts, e
 def lambda_grid_search():
     accuracies1 = []
     lambdas1 = []
-    lambda1_list = [t/100.0 for t in range(25,40)]
-    lambda2 = 0.2
+    lambda1_list = [t/100.0 for t in range(30,50)]
+    lambda2 = 0.3
     for lambda1 in lambda1_list:
         if lambda1 + lambda2 >= 1:
             continue
@@ -267,7 +267,7 @@ def lambda_grid_search():
 
     plot_graph(accuracies1, lambdas1, "grid_search_lambda1", "accuracies1", "lambda1", "accuracy")
 
-    lambda2_list = [t/100.0 for t in range(25,40)]
+    lambda2_list = [t/100.0 for t in range(30,50)]
     accuracies2 = []
     lambdas2 = []
     for lambda2 in lambda2_list:
@@ -327,5 +327,5 @@ if __name__ == "__main__":
         test_sents = read_conll_pos_file("Penn_Treebank/test.gold.conll")
         test_sents = preprocess_sent(vocab, test_sents)
         acc_viterbi = hmm_eval(test_sents, total_tokens, q_tri_counts, q_bi_counts, q_uni_counts,
-                               e_word_tag_counts, e_tag_counts)
+                               e_word_tag_counts, e_tag_counts, lambda1, lambda2)
         print "test: acc hmm viterbi: " + str(acc_viterbi)
