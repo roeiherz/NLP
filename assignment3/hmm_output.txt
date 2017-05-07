@@ -1,0 +1,8 @@
+replaced: 0.0352368561769
+replaced: 0.0494304160331
+best lambda1 is 0.54
+best lambda2 is 0.36
+best accuracy is 0.95383503253
+dev: acc hmm viterbi: 0.95383503253
+replaced: 0.0465563474702
+test: acc hmm viterbi: 0.95877143462

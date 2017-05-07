@@ -251,7 +251,7 @@ def hmm_eval(test_data, total_tokens, q_tri_counts, q_bi_counts, q_uni_counts, e
 def lambda_grid_search():
     accuracies1 = []
     lambdas1 = []
-    lambda1_list = [t/100.0 for t in range(30,50)]
+    lambda1_list = [t/100.0 for t in range(35,55)]
     lambda2 = 0.3
     for lambda1 in lambda1_list:
         if lambda1 + lambda2 >= 1:
@@ -261,7 +261,7 @@ def lambda_grid_search():
         accuracies1.append(acc_viterbi)
         lambdas1.append(lambda1)
 
-    best_index = numpy.argmin(accuracies1)
+    best_index = numpy.argmax(accuracies1)
     lambda1 = lambdas1[best_index]
     print("best lambda1 is {0}".format(lambda1))
 
@@ -278,7 +278,7 @@ def lambda_grid_search():
         accuracies2.append(acc_viterbi)
         lambdas2.append(lambda2)
 
-    best_index = numpy.argmin(accuracies2)
+    best_index = numpy.argmax(accuracies2)
     lambda2 = lambdas2[best_index]
     print("best lambda2 is {0}".format(lambda2))
 
