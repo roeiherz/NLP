@@ -68,9 +68,9 @@ if __name__ == "__main__":
     dev_sents = preprocess_sent(vocab, dev_sents)
 
     model = most_frequent_train(train_sents)
-    print "dev: most frequent acc: " + most_frequent_eval(dev_sents, model)
+    print "dev: most frequent acc: " + str(most_frequent_eval(dev_sents, model))
 
     if os.path.exists('Penn_Treebank/test.gold.conll'):
         test_sents = read_conll_pos_file("Penn_Treebank/test.gold.conll")
         test_sents = preprocess_sent(vocab, test_sents)
-        print "test: most frequent acc: " + most_frequent_eval(test_sents, model)
+        print "test: most frequent acc: " + str(most_frequent_eval(test_sents, model))

@@ -1,8 +1,46 @@
+/home/shiko/Uni/proj/bin/python2.7 /home/shiko/PycharmProjects/NLP2/assignment3/hmm.py
 replaced: 0.0352368561769
 replaced: 0.0494304160331
-best lambda1 is 0.54
-best lambda2 is 0.36
-best accuracy is 0.95383503253
-dev: acc hmm viterbi: 0.95383503253
+lambda1 - 0.45 - 0.952937657352
+lambda1 - 0.46 - 0.952937657352
+lambda1 - 0.47 - 0.952937657352
+lambda1 - 0.48 - 0.952962584441
+lambda1 - 0.49 - 0.95311214697
+lambda1 - 0.5 - 0.952987511529
+lambda1 - 0.51 - 0.953087219882
+lambda1 - 0.52 - 0.9532617095
+lambda1 - 0.53 - 0.953286636588
+lambda1 - 0.54 - 0.953411272029
+lambda1 - 0.55 - 0.953610688735
+lambda1 - 0.56 - 0.95368547
+lambda1 - 0.57 - 0.953735324177
+lambda1 - 0.58 - 0.953735324177
+lambda1 - 0.59 - 0.953760251265
+lambda1 - 0.6 - 0.953785178353
+lambda1 - 0.61 - 0.953760251265
+lambda1 - 0.62 - 0.95383503253
+lambda1 - 0.63 - 0.953859959618
+lambda1 - 0.64 - 0.953635615824
+best lambda1 is 0.63
+lambda2 - 0.2 - 0.952987511529
+lambda2 - 0.21 - 0.953211855323
+lambda2 - 0.22 - 0.9532617095
+lambda2 - 0.23 - 0.953386344941
+lambda2 - 0.24 - 0.953510980382
+lambda2 - 0.25 - 0.953510980382
+lambda2 - 0.26 - 0.953660542912
+lambda2 - 0.27 - 0.953909813795
+lambda2 - 0.28 - 0.953959667971
+lambda2 - 0.29 - 0.95383503253
+lambda2 - 0.3 - 0.953859959618
+lambda2 - 0.31 - 0.953710397089
+lambda2 - 0.32 - 0.953710397089
+lambda2 - 0.33 - 0.953710397089
+lambda2 - 0.34 - 0.953710397089
+lambda2 - 0.35 - 0.954009522148
+lambda2 - 0.36 - 0.953710397089
+best lambda2 is 0.35
+best accuracy is 0.954009522148
+dev: acc hmm viterbi: 0.954009522148
 replaced: 0.0465563474702
-test: acc hmm viterbi: 0.95877143462
+test: acc hmm viterbi: 0.959000776233
