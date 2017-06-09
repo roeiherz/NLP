@@ -1,0 +1,205 @@
+# Symbols in the grammar are case-sensitive.
+# 
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+# 
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - When *you* are writing grammars, you should 
+#      follow this convention unless you have a good reason not to.  
+#
+#    - But the  *program* should still work with grammars that don't
+#      follow this convention.  So how can the program reliably tell
+#      the difference between terminal and nonterminal symbols?  If
+#      there is at least one rule for rewriting a symbol, then that
+#      symbol is a nonterminal and should be rewritten.
+#######################
+
+# Rules for creating full sentences.
+
+1	ROOT	S .
+1	ROOT	S !
+1	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+0.12	S	NPp VPp
+0.12	VPp	VerbTp NPp
+1	VPp	VerbTp NPs
+1	VPp	VerbIp		# unary rule @
+1	VPp	VerbSp SS
+1	VPp	VerbPPp PP
+1	VPp	VerbPPp PP PP	#non-binary@
+1	VPp	COPp NPp
+1	VPp	COPp NPs
+1	VPp	COP Adj
+1	NPp	Detp Nounp
+# 0.1	NPp	NPp PP
+0.1	NPp	Detp Nounp PP	# non-binary@
+0.1	NPp	Detp Nounp SRelSp	# non-binary @
+0.12	PP	Prep NPp
+1	PP	Prep NPs
+1	Nounp	Adj Nounp
+
+0.1	Adj	Adv Adj
+0.01	NPp	NPp Co NPp	# non-binary @
+0.1	NPp	NPs Co NPs	# non-binary @
+0.05	NPp	NPs Co NPp	# non-binary @
+0.05	NPp	NPp Co NPs	# non-binary @
+0.1	VPp	VPp Co VPp
+0.1	VerbTp	VerbTp Co VerbTp
+1	SS	Comp S
+1	SRelSp	Comp RelSp
+1	RelSp	VPp	#non-binary @
+0.12	RelSp	NPp RelVPp
+1	RelSp	NPs RelVPs
+1	RelVPp	VerbTp
+0.1	RelVPp	RelVPp Co RelVPp
+1	RelVPs	VerbTs
+0.1	RelVPs	RelVPs Co RelVPs
+
+0.1	S	it EXP	# verb with explative pronoun
+1	EXP	VerbNS NPs SS	# non-binary @
+0.12	EXP	VerbNS NPp SS	# non-binary @
+
+
+1	S	NPs VPs
+1	VPs	VerbTs NPs
+0.12	VPs	VerbTs NPp
+1	VPs	VerbIs		# unary rule @
+1	VPs	VerbSs SS
+1	VPs	VerbPPs PP
+1	VPs	VerbPPs PP PP	#non-binary@
+1	VPs	COPs NPs
+0.12	VPs	COPs NPp
+1	VPs	COPs Adj
+1	NPs	Dets Nouns
+# 0.1	NP	NP PP
+0.1	NPs	Dets Nouns PP	# non-binary@
+0.1	NPs	Dets Nouns SRelSs	# non-binary @
+5	Nouns	Adj Nouns
+
+1	Adj	Adv Adj
+0.2	NPs	PropN		# unary rule @
+0.1	VPs	VPs Co VPs
+0.1	VerbTs	VerbTs Co VerbTs
+1	SS	Comp S
+1	SRelSs	Comp RelSs
+1	RelSs	VPs	#non-binary @
+1	RelSs	NPs RelVPs
+0.12	RelSs	NPp RelVPp
+
+# Vocabulary.  Your program can see that "ate" is a terminal
+# symbol because there exists no rule for rewriting it.
+# Any symbol that can rewrite as a terminal (or a string of 
+# terminals, like "chief of staff") is called a "preterminal."  Notice 
+# that a preterminal is a special kind of nonterminal.
+
+1	VerbTs	ate
+1	VerbTs	wanted
+1	VerbTs	kissed
+1	VerbTs	understood
+1	VerbTs	pickled
+
+1	VerbTp	ate
+1	VerbTp	wanted
+1	VerbTp	kissed
+1	VerbTp	understood
+1	VerbTp	pickled
+
+1	VerbTs	is eating
+1	VerbTs	is kissing
+1	VerbTs	is understanding
+1	VerbTs	is pickling
+
+1	VerbTp	are eating
+1	VerbTp	are kissing
+1	VerbTp	are understanding
+1	VerbTp	are pickling
+
+1	VerbTs	eats
+1	VerbTs	wants
+1	VerbTs	kisses
+1	VerbTs	understands
+1	VerbTs	pickles
+1	VerbTs	chooses
+
+1	VerbTp	eat
+1	VerbTp	want
+1	VerbTp	kiss
+1	VerbTp	understand
+1	VerbTp	pickle
+1	VerbTp	choose
+
+1	VerbIs	sighed
+1	VerbIp	sighed
+
+1	VerbIs	is sighing
+1	VerbIp	are sighing
+
+1	VerbIp	sigh
+1	VerbIs	sighs
+
+1	VerbSs	thought
+1	VerbSp	thought
+
+1	VerbSs	is thinking
+1	VerbSp	are thinking
+
+1	VerbSs	thinks
+1	VerbSp	think
+
+1	VerbNS	perplexed
+
+1	VerbPPs	worked
+1	VerbPPs	is working
+1	verbPPs	works
+
+1	VerbPPp	worked
+1	VerbPPp	are working
+1	verbPPp	work
+
+1	COPs	is
+1	COPp	are
+
+1	Dets	the
+1	Dets	a
+1	Dets	every
+1	Detp	the
+
+1	Nouns	president
+1	Nouns	sandwich
+1	Nouns	pickle
+1	Nouns	chief of staff
+1	Nouns	floor
+1	Nouns	proposal
+1	Nouns	desk
+
+1	Nounp	citizens
+
+1	Adj	fine
+1	Adj	delicious
+1	Adj	perplexed
+1	Adj	pickled
+
+1	Adv	very
+
+1	Prep	with
+1	Prep	on
+1	Prep	under
+1	Prep	in
+
+1	PropN Sally
+
+1	Comp	that
+
+1	Co	and
