@@ -93,7 +93,7 @@ def cky(pcfg, sent):
     """
 
     # print Sentence
-    print ("The Sentence is {}".format(sent))
+    print ("The Sentence is: '{}'".format(sent))
 
     sent_lst = sent.split(' ')
     # length of the list of parser sentence
@@ -141,7 +141,7 @@ def cky(pcfg, sent):
 
     # Do the parsing only for a non negative values
     if pi[(i, j, X)] > 0:
-        return parse((i, j, "ROOT"), bp)
+        return parse((i, j, X), bp)
 
     return "FAILED TO PARSE!"
 
