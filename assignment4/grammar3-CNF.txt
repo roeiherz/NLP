@@ -19,9 +19,9 @@
 
 # Rules for creating full sentences.
 
-2	ROOT S Punc
-1	Punc .
-1	Punc !
+2	ROOT S EST
+1	EST .
+1	EST !
 1	ROOT QUES S
 1	QUES ISIT TRTH
 1	ISIT ISN ITN
@@ -92,7 +92,7 @@
 1	SS	Comp S
 1	SRSP	Comp RIPS
 0.12	RIPS	NPips VerbPTIS
-1	RIPS	NPs VerbTs
+1	RIPS	NPs VerbTst
 0.12	RIPS	NPips RelVPSp
 1	RelVPSp	VerbSp SRSP
 1	RIPS	NPs RelVPSs
@@ -105,46 +105,46 @@
 
 
 1	S	NPs VPs
-1	VPs	VerbTs NPs
-0.12	VPs	VerbTs NPips
+1	VPs	VerbTst NPs
+0.12	VPs	VerbTst NPips
 0.3	VPs	sighs
 0.3	VPs	sighed
-0.3	VPs	COPs GerI
+0.3	VPs	COPSS GerI
 1	VPs	VerbSs SS
 1	VPs	VerbPPs PP
 1	VPs	VerbPPs PPP
-1	VPs	COPs NPs
-0.12	VPs	COPs NPips
-1	VPs	COPs Adj
-1	NPs	Dets Nouns
-0.1	NPs	Dets NoPPs
+1	VPs	COPSS NPs
+0.12	VPs	COPSS NPips
+1	VPs	COPSS Adj
+1	NPs	Desti Nouns
+0.1	NPs	Desti NoPPs
 1	NoPPs	Nouns PP
-0.1	NPs	Dets NoSRs
+0.1	NPs	Desti NoSRs
 1	NoSRs	Nouns SRelSs
 5	Nouns	Adj Nouns
 
-0.12	RelSs	VerbTs NPs
-0.014	RelSs	VerbTs NPips
+0.12	RelSs	VerbTst NPs
+0.014	RelSs	VerbTst NPips
 0.04	RelSs	sighs
 0.04	RelSs	sighed
-0.04	RelSs	COPs GerI
+0.04	RelSs	COPSS GerI
 0.12	RelSs	VerbSs SS
 0.12	RelSs	VerbPPs PP
 0.12	RelSs	VerbPPs PPP
-0.12	RelSs	COPs NPs
-0.014	RelSs	COPs NPips
-0.12	RelSs	COPs Adj
+0.12	RelSs	COPSS NPs
+0.014	RelSs	COPSS NPips
+0.12	RelSs	COPSS Adj
 0.012	RelSs	VPs CVPs
 
 1	Adj	Adv Adj
 0.2	NPs	Sally	# unary rule
 0.1	VPs	VPs CVPs
 1	CVPs	Co VPs
-0.1	VerbTs	VerbTs CVerbTs
-1	CVerbTs	Co CVerbTs
+0.1	VerbTst	VerbTst CVbTs
+1	CVbTs	Co CVbTs
 1	SS	Comp S
 1	SRelSs	Comp RelSs
-1	RelSs	NPs VerbTs
+1	RelSs	NPs VerbTst
 0.12	RelSs	NPips VerbPTIS
 0.12	RelSs	NPips RelVPSp
 1	RelVPSp	VerbSp SRelSs
@@ -152,11 +152,11 @@
 1	RelVPSs	VerbSs SRelSs
 
 
-4	VerbTs	COPs GerT
-4	VerbPTIS	COPp GerT
-1	VerbSs	COPs GerS
+4	VerbTst	COPSS GerST
+4	VerbPTIS	COPp GerST
+1	VerbSs	COPSS GerS
 1	VerbSp	COPp GerS
-1	VerbPPs	COPs GerPP
+1	VerbPPs	COPSS GerPP
 1	VerbPPp	COPp GerPP
 
 # Vocabulary.  Your program can see that "ate" is a terminal
@@ -165,12 +165,12 @@
 # terminals, like "chief of staff") is called a "preterminal."  Notice 
 # that a preterminal is a special kind of nonterminal.
 
-1	VerbTs	ate
-1	VerbTs	wanted
-1	VerbTs	kissed
-1	VerbTs	understood
-1	VerbTs	pickled
-1	VerbTs	chose
+1	VerbTst	ate
+1	VerbTst	wanted
+1	VerbTst	kissed
+1	VerbTst	understood
+1	VerbTst	pickled
+1	VerbTst	chose
 
 1	VerbPTIS	ate
 1	VerbPTIS	wanted
@@ -179,18 +179,18 @@
 1	VerbPTIS	pickled
 1	VerbPTIS	chose
 
-1	GerT	eating
-1	GerT	kissing
-1	GerT	understanding
-1	GerT	pickling
-1	GerT	choosing
+1	GerST	eating
+1	GerST	kissing
+1	GerST	understanding
+1	GerST	pickling
+1	GerST	choosing
 
-1	VerbTs	eats
-1	VerbTs	wants
-1	VerbTs	kisses
-1	VerbTs	understands
-1	VerbTs	pickles
-1	VerbTs	chooses
+1	VerbTst	eats
+1	VerbTst	wants
+1	VerbTst	kisses
+1	VerbTst	understands
+1	VerbTst	pickles
+1	VerbTst	chooses
 
 1	VerbPTIS	eat
 1	VerbPTIS	want
@@ -219,12 +219,12 @@
 1	VerbPPp	worked
 1	verbPPp	work
 
-1	COPs	is
+1	COPSS	is
 1	COPp	are
 
-1	Dets	the
-1	Dets	a
-1	Dets	every
+1	Desti	the
+1	Desti	a
+1	Desti	every
 1	DEtips	the
 
 1	Nouns	president

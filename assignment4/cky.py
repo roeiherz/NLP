@@ -30,7 +30,7 @@ def get_probabilities(N, rules, sums):
     return q
 
 
-def parse(X, bp):
+def parse(X, bp, sent_lst):
     """
     This function iteratively
     :param X: Tuple of the (i, j, X) which i and j indices in the words in the sentence and X is a non-terminal
@@ -41,10 +41,10 @@ def parse(X, bp):
     # Get the words
     i, j, r = X[0], X[1], X[2]
     if i == j:
-        return "(%s %s)" % (r, sent[i])
+        return "(%s %s)" % (r, sent_lst[i])
     else:
         Y, Z = bp[(i, j, r)]
-        return "(%s %s %s)" % (r, parse(Y, bp), parse(Z, bp))
+        return "(%s %s %s)" % (r, parse(Y, bp, sent_lst), parse(Z, bp, sent_lst))
 
 
 def initialization(n, N, q, sent):
@@ -141,7 +141,7 @@ def cky(pcfg, sent):
 
     # Do the parsing only for a non negative values
     if pi[(i, j, X)] > 0:
-        return parse((i, j, X), bp)
+        return parse((i, j, X), bp, sent_lst)
 
     return "FAILED TO PARSE!"
 

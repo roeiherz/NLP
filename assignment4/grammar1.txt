@@ -37,7 +37,7 @@
 1	NP	Det Noun
 0.1	NP	NP PP
 1	PP	Prep NP
-5	Noun	Adj Noun
+4	Noun	Adj Noun
 
 # Vocabulary.  Your program can see that "ate" is a terminal
 # symbol because there exists no rule for rewriting it.

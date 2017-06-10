@@ -19,9 +19,9 @@
 
 # Rules for creating full sentences.
 
-2	ROOT S Punc
-1	Punc .
-1	Punc !
+2	ROOT S EST
+1	EST .
+1	EST !
 1	ROOT QUES S
 1	QUES ISIT TRTH
 1	ISIT ISN ITN
@@ -42,7 +42,7 @@
 
 1	S	NP VP
 0.5	S	NP VerbI
-1	VP	VerbT NP
+1	VP	VerbTst NP
 1	VP	VerbS SS
 1	VP	VerbPP PP
 1	VP	VerbPP PPP
@@ -62,8 +62,8 @@
 1	CNP	Co NP
 0.1	VP	VP CVP
 1	CVP	Co VP
-0.1	VerbT	VerbT CVerbT
-1	CVrebT	Co VerbT
+0.1	VerbTst	VerbTst CVbTs
+1	CVbTs	Co VerbTst
 1	SS	Comp S
 
 0.1	S	ITN EXP
@@ -72,10 +72,10 @@
 
 0.2	NP	Sally
 
-5	VerbT	Cop Ger
-1	VerbI	Cop Ger
-1	VerbS	Cop Ger
-1	VerbPP	Cop Ger
+5	VerbTst	Cop GerST
+1	VerbI	Cop GerST
+1	VerbS	Cop GerST
+1	VerbPP	Cop GerST
 
 # Vocabulary.  Your program can see that "ate" is a terminal
 # symbol because there exists no rule for rewriting it.
@@ -83,30 +83,30 @@
 # terminals, like "chief of staff") is called a "preterminal."  Notice 
 # that a preterminal is a special kind of nonterminal.
 
-1	VerbT	ate
-1	VerbT	wanted
-1	VerbT	kissed
-1	VerbT	understood
-1	VerbT	pickled
+1	VerbTst	ate
+1	VerbTst	wanted
+1	VerbTst	kissed
+1	VerbTst	understood
+1	VerbTst	pickled
 
-1	Ger	eating
-1	Ger	kissing
-1	Ger	understanding
-1	Ger	pickling
+1	GerST	eating
+1	GerST	kissing
+1	GerST	understanding
+1	GerST	pickling
 
 1	VerbI	sighed
 
-1	Ger	sighing
+1	GerST	sighing
 
 1	VerbS	thought
 
-1	Ger	thinking
+1	GerST	thinking
 
 1	VerbNS	perplexed
 
 1	VerbPP	worked
 
-1	Ger	working
+1	GerST	working
 
 1	Cop	is
 
@@ -131,6 +131,7 @@
 1	Adj	delicious
 1	Adj	perplexed
 1	Adj	pickled
+1	Adj	lazy
 
 1	Adv	very
 
