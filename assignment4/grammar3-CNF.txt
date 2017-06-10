@@ -1,0 +1,259 @@
+# Symbols in the grammar are case-sensitive.
+# 
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+# 
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - When *you* are writing grammars, you should 
+#      follow this convention unless you have a good reason not to.  
+#
+#    - But the  *program* should still work with grammars that don't
+#      follow this convention.  So how can the program reliably tell
+#      the difference between terminal and nonterminal symbols?  If
+#      there is at least one rule for rewriting a symbol, then that
+#      symbol is a nonterminal and should be rewritten.
+#######################
+
+# Rules for creating full sentences.
+
+2	ROOT S Punc
+1	Punc .
+1	Punc !
+1	ROOT QUES S
+1	QUES ISIT TRTH
+1	ISIT ISN ITN
+1	TRTH TRN THN
+1	ISN is
+1	ITN it
+1	TRN true
+1	THN that
+
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+0.12	S	NPips VPP
+0.12	VPP	VerbPTIS NPips
+1	VPP	VerbPTIS NPs
+0.3	VPP	sigh
+0.3	VPP	sighed
+0.3	VPP	COPp GerI
+1	VPP	VerbSp SS
+1	VPP	VerbPPp PP
+1	VPP	VerbPPp PPP
+1	PPP	PP PP
+1	VPP	COPp NPips
+1	VPP	COPp NPs
+1	VPP	COP Adj
+1	NPips	DEtips Nounp
+0.1	NPips	DEtips NoPPPS
+1	NoPPPS	Nounp PP
+0.1	NPips	DEtips NoSRp
+1	NoSRp	Nounp SRSP
+
+0.12	RIPS	VerbPTIS NPips
+0.014	RIPS	VerbPTIS NPs
+0.04	RIPS	sigh
+0.04	RIPS	sighed
+0.04	RIPS	COPp GerI
+0.12	RIPS	VerbSp SS
+0.12	RIPS	VerbPPp PP
+0.12	RIPS	VerbPPp PPP
+0.014	RIPS	COPp NPips
+0.12	RIPS	COPp NPs
+0.12	RIPS	COP Adj
+0.012	RIPS	VPP CVPR
+
+	
+0.12	PP	Prep NPips
+1	PP	Prep NPs
+1	Nounp	Adj Nounp
+
+0.1	Adj	Adv Adj
+0.01	NPips	NPips CNPR
+1	CNPR	Co NPips
+0.1	NPips	NPs CNPs
+1	CNPs	Co NPs
+0.05	NPips	NPs CNPR
+0.05	NPips	NPips CNPs
+0.1	VPP	VPP CVPR
+1	CVPR	Co VPP
+0.1	VerbPTIS	VerbPTIS CVebTp
+1	CVebTp	Co VerbPTIS
+1	SS	Comp S
+1	SRSP	Comp RIPS
+0.12	RIPS	NPips VerbPTIS
+1	RIPS	NPs VerbTs
+0.12	RIPS	NPips RelVPSp
+1	RelVPSp	VerbSp SRSP
+1	RIPS	NPs RelVPSs
+1	RelVPSs	VerbSs SRSP
+
+0.1	S	ITN EXP		# verb with explative pronoun
+1	EXP	VerbNS NSS
+1	NSS	NPs SS
+0.12	NSS	NPips SS
+
+
+1	S	NPs VPs
+1	VPs	VerbTs NPs
+0.12	VPs	VerbTs NPips
+0.3	VPs	sighs
+0.3	VPs	sighed
+0.3	VPs	COPs GerI
+1	VPs	VerbSs SS
+1	VPs	VerbPPs PP
+1	VPs	VerbPPs PPP
+1	VPs	COPs NPs
+0.12	VPs	COPs NPips
+1	VPs	COPs Adj
+1	NPs	Dets Nouns
+0.1	NPs	Dets NoPPs
+1	NoPPs	Nouns PP
+0.1	NPs	Dets NoSRs
+1	NoSRs	Nouns SRelSs
+5	Nouns	Adj Nouns
+
+0.12	RelSs	VerbTs NPs
+0.014	RelSs	VerbTs NPips
+0.04	RelSs	sighs
+0.04	RelSs	sighed
+0.04	RelSs	COPs GerI
+0.12	RelSs	VerbSs SS
+0.12	RelSs	VerbPPs PP
+0.12	RelSs	VerbPPs PPP
+0.12	RelSs	COPs NPs
+0.014	RelSs	COPs NPips
+0.12	RelSs	COPs Adj
+0.012	RelSs	VPs CVPs
+
+1	Adj	Adv Adj
+0.2	NPs	Sally	# unary rule
+0.1	VPs	VPs CVPs
+1	CVPs	Co VPs
+0.1	VerbTs	VerbTs CVerbTs
+1	CVerbTs	Co CVerbTs
+1	SS	Comp S
+1	SRelSs	Comp RelSs
+1	RelSs	NPs VerbTs
+0.12	RelSs	NPips VerbPTIS
+0.12	RelSs	NPips RelVPSp
+1	RelVPSp	VerbSp SRelSs
+1	RelSs	NPs RelVPSs
+1	RelVPSs	VerbSs SRelSs
+
+
+4	VerbTs	COPs GerT
+4	VerbPTIS	COPp GerT
+1	VerbSs	COPs GerS
+1	VerbSp	COPp GerS
+1	VerbPPs	COPs GerPP
+1	VerbPPp	COPp GerPP
+
+# Vocabulary.  Your program can see that "ate" is a terminal
+# symbol because there exists no rule for rewriting it.
+# Any symbol that can rewrite as a terminal (or a string of 
+# terminals, like "chief of staff") is called a "preterminal."  Notice 
+# that a preterminal is a special kind of nonterminal.
+
+1	VerbTs	ate
+1	VerbTs	wanted
+1	VerbTs	kissed
+1	VerbTs	understood
+1	VerbTs	pickled
+1	VerbTs	chose
+
+1	VerbPTIS	ate
+1	VerbPTIS	wanted
+1	VerbPTIS	kissed
+1	VerbPTIS	understood
+1	VerbPTIS	pickled
+1	VerbPTIS	chose
+
+1	GerT	eating
+1	GerT	kissing
+1	GerT	understanding
+1	GerT	pickling
+1	GerT	choosing
+
+1	VerbTs	eats
+1	VerbTs	wants
+1	VerbTs	kisses
+1	VerbTs	understands
+1	VerbTs	pickles
+1	VerbTs	chooses
+
+1	VerbPTIS	eat
+1	VerbPTIS	want
+1	VerbPTIS	kiss
+1	VerbPTIS	understand
+1	VerbPTIS	pickle
+1	VerbPTIS	choose
+
+1	GerI	sighing
+
+1	VerbSs	thought
+1	VerbSp	thought
+
+1	GerS	thinking
+
+1	VerbSs	thinks
+1	VerbSp	think
+
+1	VerbNS	perplexed
+
+1	GerPP	working
+
+1	VerbPPs	worked
+1	verbPPs	works
+
+1	VerbPPp	worked
+1	verbPPp	work
+
+1	COPs	is
+1	COPp	are
+
+1	Dets	the
+1	Dets	a
+1	Dets	every
+1	DEtips	the
+
+1	Nouns	president
+1	Nouns	sandwich
+1	Nouns	pickle
+1	Nouns	CHF OFS
+1	CHF	chief
+1	OFS	OFN STN
+1	OFN	of
+1	STN	staff
+1	Nouns	floor
+1	Nouns	proposal
+1	Nouns	desk
+
+1	Nounp	citizens
+
+1	Adj	fine
+1	Adj	delicious
+1	Adj	perplexed
+1	Adj	pickled
+1	Adj	lazy
+
+1	Adv	very
+
+1	Prep	with
+1	Prep	on
+1	Prep	under
+1	Prep	in
+
+1	Comp	that
+
+1	Co	and
