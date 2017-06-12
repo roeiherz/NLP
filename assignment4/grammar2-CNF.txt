@@ -50,14 +50,12 @@
 1	VP	Cop NP
 1	VP	Cop Adj
 1	NP	Det Noun
-# 0.1	NP	NP PP
 0.1	NP	DN PP	
 1	DN	Det Noun
 1	PP	Prep NP
 5	Noun	Adj Noun
 
 0.1	Adj	Adv Adj
-# 1	NP	PropN		# non active
 0.1	NP	NP CNP	
 1	CNP	Co NP
 0.1	VP	VP CVP

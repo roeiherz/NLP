@@ -257,3 +257,5 @@
 1	Comp	that
 
 1	Co	and
+
+1	PropN	Sally
